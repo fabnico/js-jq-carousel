@@ -1,63 +1,43 @@
-function imgForward(){
-   var actImg = $('img.active')
-   actImg.removeClass('active')
-   if(!actImg.hasClass('last')){
-      actImg.next().addClass('active')
+function moveForward(element,cssClass,position,elPosition){
+   var actElement = element
+   actElement.removeClass(cssClass)
+   if(!actElement.hasClass(position)){
+      actElement.next().addClass(cssClass)
    }else{
-      $('img.first').addClass('active')
+      $(elPosition).addClass(cssClass)
    }
 }
 
-function dotForward(){
-   var actDot = $('i.active')
-   actDot.removeClass('active')
-   if(!actDot.hasClass('last')){
-      actDot.next().addClass('active')
+function moveBack(element,cssClass,position,elPosition){
+   var actElement = element
+   actElement.removeClass(cssClass)
+   if(!actElement.hasClass(position)){
+      actElement.prev().addClass(cssClass)
    }else{
-      $('i.first').addClass('active')
-   }
-}
-
-function imgBack(){
-   var actImg = $('img.active')
-   actImg.removeClass('active')
-   if(!actImg.hasClass('first')){
-      actImg.prev().addClass('active')
-   }else{
-      $('img.last').addClass('active')
-   }
-}
-
-function dotBack(){
-   var actDot = $('i.active')
-   actDot.removeClass('active')
-   if(!actDot.hasClass('first')){
-      actDot.prev().addClass('active')
-   }else{
-      $('i.last').addClass('active')
+      $(elPosition).addClass(cssClass)
    }
 }
 
 $('.next').click(function(){
-   imgForward()
-   dotForward()
+   moveForward($('img.active'),'active','last','img.first')
+   moveForward($('i.active'),'active','last','i.first')
 })
 
 $('.prev').click(function(){
-   imgBack()
-   dotBack()
+   moveBack($('img.active'),'active','first','img.last')
+   moveBack($('i.active'),'active','first','i.last')
 })
 
 $(document).keydown(function(right){
   if(right.keyCode == 39) {
-    imgForward()
-    dotForward()
+    moveForward($('img.active'),'active','last','img.first')
+    moveForward($('i.active'),'active','last','i.first')
   }
 })
 
 $(document).keydown(function(left){
    if(left.keyCode == 37) {
-   imgBack()
-   dotBack()
+   moveBack($('img.active'),'active','first','img.last')
+   moveBack($('i.active'),'active','first','i.last')
    }
 })
